@@ -1,0 +1,16 @@
+Pond Sybil Detection Analysis Report
+Generated: 2025-11-07 01:49:08
+============================================================
+
+Input: pond_test_example.csv
+Total addresses: 1
+Threshold: 0.5
+
+Classifications:
+  Sybil/Bot: 0
+  Genuine: 1
+
+Risk Distribution:
+  HIGH: 0
+  MEDIUM: 0
+  LOW: 1

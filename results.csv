@@ -1,0 +1,2 @@
+wallet_address,sybil_score,prediction,confidence,risk_level,github_verified,twitter_verified,social_risk,onchain_risk
+0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045,0.2,GENUINE,0.6,LOW,True,True,0.0,0.333
