@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Pond Sybil Detection Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css" />
+<style>
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    margin: 0;
+    padding: 2rem 3rem;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    margin-top: 2.5rem;
+    font-size: 1.4rem;
+}
+
+p.meta {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+.summary-cards {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    margin: 2rem 0;
+}
+
+.card {
+    background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(99,102,241,0.2));
+    border: 1px solid rgba(148,163,184,0.2);
+    border-radius: 12px;
+    padding: 1.2rem;
+    backdrop-filter: blur(10px);
+}
+
+.card-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+}
+
+.card-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 0.3rem;
+}
+
+.card-value.good {
+    color: #34d399;
+}
+
+.card-value.alert {
+    color: #f87171;
+}
+
+table.dataTable thead th {
+    background: rgba(148,163,184,0.1);
+    color: #e2e8f0;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    background: rgba(15,23,42,0.8);
+    border: 1px solid rgba(148,163,184,0.3);
+    color: #e2e8f0;
+    border-radius: 6px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    background: rgba(15,23,42,0.8);
+    border: 1px solid rgba(148,163,184,0.3);
+    color: #e2e8f0;
+    border-radius: 6px;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    margin-top: 2rem;
+}
+
+table.dataTable tbody tr:hover {
+    background: rgba(59,130,246,0.15);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-low {
+    background: rgba(52,211,153,0.2);
+    color: #34d399;
+}
+
+.badge-medium {
+    background: rgba(251,191,36,0.2);
+    color: #fbbf24;
+}
+
+.badge-high {
+    background: rgba(248,113,113,0.2);
+    color: #f87171;
+}
+
+.badge-neutral {
+    background: rgba(148,163,184,0.2);
+    color: #cbd5f5;
+}
+
+.badge-yes {
+    background: rgba(52,211,153,0.2);
+    color: #34d399;
+}
+
+.badge-no {
+    background: rgba(248,113,113,0.2);
+    color: #f87171;
+}
+
+.pill {
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.pill-low {
+    background: rgba(52,211,153,0.2);
+    color: #34d399;
+}
+
+.pill-medium {
+    background: rgba(251,191,36,0.2);
+    color: #fbbf24;
+}
+
+.pill-high {
+    background: rgba(248,113,113,0.2);
+    color: #f87171;
+}
+
+a {
+    color: #60a5fa;
+}
+
+a:hover {
+    color: #93c5fd;
+}
+
+footer {
+    margin-top: 3rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+@media (max-width: 768px) {
+    body { padding: 1.5rem; }
+    table { font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+    <h1>Pond Sybil Detection Dashboard</h1>
+    <p class="meta">Input: pond_test_example.csv | Results: results.csv | Generated: 2025-11-07 02:07:33</p>
+
+    
+    <div class="summary-cards">
+        <div class="card">
+            <div class="card-title">Total Addresses</div>
+            <div class="card-value">2</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Genuine</div>
+            <div class="card-value good">1</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Sybil / High Risk</div>
+            <div class="card-value alert">1</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Avg Sybil Score</div>
+            <div class="card-value">0.50</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Avg Confidence</div>
+            <div class="card-value">0.60</div>
+        </div>
+    </div>
+    
+
+    <table id="resultsTable" class="display">
+        <thead>
+            <tr>
+                <th>Wallet</th>
+                <th>Sybil Score</th>
+                <th>Prediction</th>
+                <th>Risk Level</th>
+                <th>Confidence</th>
+                <th>On-chain Risk</th>
+                <th>Social Risk</th>
+                <th>GitHub Verified</th>
+                <th>Twitter Verified</th>
+                <th>GitHub</th>
+                <th>Twitter</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td class="address"><a href="https://basescan.org/address/0xd8da6bf26964af9d7eed9e03e53415d37aa96045" target="_blank" rel="noopener">0xd8da6bf2…</a></td><td><span class="pill pill-low">0.20</span></td><td>GENUINE</td><td><span class="badge badge-low">LOW</span></td><td>0.60</td><td>0.33</td><td>0.00</td><td><span class="badge badge-yes">Yes</span></td><td><span class="badge badge-yes">Yes</span></td><td><a href="https://github.com/vbuterin" target="_blank" rel="noopener">vbuterin</a></td><td><a href="https://twitter.com/VitalikButerin" target="_blank" rel="noopener">@VitalikButerin</a></td></tr>
+<tr><td class="address"><a href="https://basescan.org/address/0xf0d2e80166588893f14d5ace57cdd342c15f7fdf" target="_blank" rel="noopener">0xf0d2e801…</a></td><td><span class="pill pill-high">0.80</span></td><td>SYBIL</td><td><span class="badge badge-high">HIGH</span></td><td>0.60</td><td>1.00</td><td>0.50</td><td><span class="badge badge-yes">Yes</span></td><td><span class="badge badge-no">No</span></td><td><a href="https://github.com/AswinWebDev" target="_blank" rel="noopener">AswinWebDev</a></td><td><a href="https://twitter.com/ash_mi_nombre" target="_blank" rel="noopener">@ash_mi_nombre</a></td></tr>
+        </tbody>
+    </table>
+
+    <footer>
+        Built for Pond Bounty Hunter Competition · Generated with dashboard.py
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#resultsTable').DataTable({
+                pageLength: 25,
+                order: [[1, 'desc']]
+            });
+        });
+    </script>
+</body>
+</html>

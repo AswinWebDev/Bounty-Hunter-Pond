@@ -124,6 +124,31 @@ wallet_address,sybil_score,prediction,confidence,risk_level,github_verified,twit
 0xDEF...,0.85,SYBIL,0.70,HIGH,False,False,1.0,0.8
 ```
 
+### 4. Explore the Interactive Dashboard (Optional but recommended)
+
+After running `predict_pond.py`, generate a rich UI to review inputs and predictions side-by-side:
+
+```bash
+python dashboard.py --input pond_test_data.csv --results results.csv --output dashboard.html --open
+```
+
+**Dashboard highlights:**
+- 📊 **DataTable view** of every wallet with sorting, filtering, and pagination
+- 🎯 **Score pills & risk badges** for quick triage (LOW / MEDIUM / HIGH)
+- 🔗 **Instant links**
+  - BaseScan transaction history (opens in new tab)
+  - GitHub profile (if provided)
+  - Twitter/X profile (if provided)
+- 🧮 **Summary cards** showing totals, Sybil count, and average scores
+
+**How to open the UI:**
+1. Use the `--open` flag (shown above) to launch automatically after generation, **or**
+2. Double-click `dashboard.html` in your file explorer, **or**
+3. Run `python dashboard.py ...` and manually open the saved HTML in any browser
+
+> The dashboard reads the original input CSV and `results.csv`, so re-run the command whenever you refresh predictions.
+
+
 ### 📊 Understanding the Results
 
 Each column explained:
