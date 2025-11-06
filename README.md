@@ -364,20 +364,8 @@ python predict_pond.py --input data.csv --include-features
 
 ---
 
-## 🏆 For Pond Competition
-
-### Submission Checklist
-
-- ✅ Public GitHub repository
-- ✅ Clear README with methodology
-- ✅ Source code (all scripts)
-- ✅ Dataset with documentation
-- ✅ Reproducible predictions
-- ✅ Pond profile URL
-
-### Your Profile
-
-**Pond Profile:** [Add your pond.so profile URL here]
+**Pond Profile:** https://cryptopond.xyz/developer/01946304-6b60-11f0-a1f3-024775222cc3
+**Pond Name:** Ash
 
 ---
 
