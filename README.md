@@ -381,7 +381,7 @@ python predict_pond.py --input data.csv --include-features
 
 ## 🔗 Resources
 
-- **Pond Platform**: https://pond.so
+- **Pond Platform**: https://cryptopond.xyz/
 - **Etherscan API**: https://etherscan.io/apis
 - **BaseScan**: https://basescan.org
 
